@@ -9,15 +9,16 @@ app.use(express.json());
 app.get('/testimonials', (req, res) => {
   res.json(testimonials);
 });
+app.get('/testimonials/random', (req, res) => {
+  const random = testimonials[Math.floor(Math.random() * testimonials.length)];
+  res.json(random);
+});
 app.get('/testimonials/:id', (req, res) => {
-  const id = req.params.id;
+  const id = Number(req.params.id);
   const testimonial = testimonials.find((t) => t.id === id);
   res.json(testimonial);
 });
-app.get('/testimonials/random', (req, res) => {
-  const random = Math.floor(Math.random() * testimonials.length);
-  res.json(testimonials[random]);
-});
+
 app.post('/testimonials', (req, res) => {
   const { author, text } = req.body;
   const newElement = { id: shortid.generate(), author, text };
@@ -25,7 +26,7 @@ app.post('/testimonials', (req, res) => {
   res.json({ message: 'OK' });
 });
 app.put('/testimonials/:id', (req, res) => {
-  const id = req.params.id;
+  const id = Number(req.params.id);
   const { author, text } = req.body;
   const testimonialId = testimonials.findIndex((t) => t.id === id);
   if (testimonialId !== -1) {
@@ -36,7 +37,7 @@ app.put('/testimonials/:id', (req, res) => {
   }
 });
 app.delete('/testimonials/:id', (req, res) => {
-  const id = req.params.id;
+  const id = Number(req.params.id);
   const testimonialId = testimonials.findIndex((t) => t.id === id);
   if (testimonialId !== -1) {
     testimonials.splice(testimonialId, 1);
