@@ -6,3 +6,5 @@ const db = [
     text: 'They really know how to make you happy.',
   },
 ];
+
+module.exports = db;
