@@ -21,8 +21,18 @@ router.get('/seats/:id', (req, res) => {
 });
 
 router.post('/seats', (req, res) => {
-  const { author, text } = req.body;
-  const newElement = { id: shortid.generate(), author, text };
+  console.log('Request body:', req.body);
+
+  const { day, seat, client, email } = req.body;
+  if (!day || !seat || !client || !email) {
+    return res.status(404).json({ message: 'Complete the fields' });
+  }
+  const checkSeats = db.seats.some((e) => e.day === day && e.seat === seat);
+  if (checkSeats) {
+    return res.status(400).json({ message: 'The slot is already taken...' });
+  }
+
+  const newElement = { id: shortid.generate(), day, seat, client, email };
   db.seats.push(newElement);
   res.json({ message: 'OK' });
 });
