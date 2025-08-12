@@ -11,6 +11,10 @@ const app = express();
 const server = app.listen(process.env.PORT || 8000, () => {
   console.log('Server is running on port: 8000');
 });
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
 const io = socket(server);
 
 io.on('connection', (socket) => {
