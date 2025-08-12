@@ -34,6 +34,8 @@ router.post('/seats', (req, res) => {
 
   const newElement = { id: shortid.generate(), day, seat, client, email };
   db.seats.push(newElement);
+
+  req.io.emit('seatsUpdate', db.seats);
   res.json({ message: 'OK' });
 });
 router.put('/seats/:id', (req, res) => {
