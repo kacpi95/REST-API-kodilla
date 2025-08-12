@@ -16,6 +16,10 @@ const SeatChooser = ({ chosenDay, chosenSeat, updateSeat }) => {
   const seats = useSelector(getSeats);
   const requests = useSelector(getRequests);
 
+  const seatsSum = 50;
+  const seatsTaken = seats.filter((el) => el.day === chosenDay).length;
+  const seatsFree = seatsSum - seatsTaken;
+
   const [socket, setSocket] = useState();
 
   useEffect(() => {
@@ -84,6 +88,9 @@ const SeatChooser = ({ chosenDay, chosenSeat, updateSeat }) => {
       {requests['LOAD_SEATS'] && requests['LOAD_SEATS'].error && (
         <Alert color='warning'>Couldn't load seats...</Alert>
       )}
+      <p>
+        Free seats: {seatsFree}/{seatsSum}
+      </p>
     </div>
   );
 };
