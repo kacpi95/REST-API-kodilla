@@ -5,6 +5,7 @@ import {
   getSeats,
   loadSeatsRequest,
   getRequests,
+  loadSeats,
 } from '../../../redux/seatsRedux';
 import './SeatChooser.scss';
 import { useState } from 'react';
@@ -24,10 +25,10 @@ const SeatChooser = ({ chosenDay, chosenSeat, updateSeat }) => {
       { transports: ['websocket'] }
     );
     setSocket(socket);
-    const interval = setInterval(() => {
-      dispatch(loadSeatsRequest());
-    }, 120000);
-    return () => clearInterval(interval);
+
+    socket.on('seatsUpdated', (seats) => {
+      dispatch(loadSeats(seats));
+    });
   }, [dispatch]);
 
   const isTaken = (seatId) => {
