@@ -34,10 +34,10 @@ exports.postSeat = async (req, res) => {
   const { day, seat, client, email } = req.body;
   try {
     const newSeat = new Seat({
-      day: day,
-      seat: seat,
-      client: client,
-      email: email,
+      day,
+      seat,
+      client,
+      email,
     });
     await newSeat.save();
     res.json({ message: 'OK' });
@@ -47,13 +47,15 @@ exports.postSeat = async (req, res) => {
 };
 
 exports.putSeatId = async (req, res) => {
-  const { author, text } = req.body;
+  const { day, seat, client, email } = req.body;
   try {
     const seat = await Seat.findByIdAndUpdate(
       req.params.id,
       {
-        author: author,
-        text: text,
+        day,
+        seat,
+        client,
+        email,
       },
       { new: true }
     );
