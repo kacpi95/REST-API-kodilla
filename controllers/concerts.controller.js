@@ -34,32 +34,38 @@ exports.getConcertId = async (req, res) => {
   }
 };
 
-router.post('/concerts', (req, res) => {
+exports.postConcert = async (req, res) => {
   const { author, text } = req.body;
-  const newElement = { id: shortid.generate(), author, text };
-  db.concerts.push(newElement);
-  res.json({ message: 'OK' });
-});
-router.put('/concerts/:id', (req, res) => {
-  const id = Number(req.params.id);
-  const { author, text } = req.body;
-  const testimonialId = db.concerts.findIndex((t) => t.id === id);
-  if (testimonialId !== -1) {
-    db.concerts[testimonialId] = { id, author, text };
-    res.json({ message: 'OK' });
-  } else {
-    res.status(404).json({ message: 'Error' });
+  try {
+    const newConcert = new Concert({ author: author, text: text });
+    await newConcert.save();
+    res.json(newConcert);
+  } catch (err) {
+    res.status(500).json({ message: err });
   }
-});
-router.delete('/concerts/:id', (req, res) => {
-  const id = Number(req.params.id);
-  const testimonialId = db.concerts.findIndex((t) => t.id === id);
-  if (testimonialId !== -1) {
-    db.concerts.splice(testimonialId, 1);
-    res.json({ message: 'OK' });
-  } else {
-    res.status(404).json({ message: 'Error' });
-  }
-});
+};
 
-module.exports = router;
+exports.putConcertId = async (req, res) => {
+  const { author, text } = req.body;
+
+  try {
+    const concert = await Concert.findByIdAndUpdate(
+      req.params.id,
+      { author: author, text: text },
+      { new: true }
+    );
+    if (!concert) res.status(404).json({ message: 'Not Found' });
+    else res.json(concert);
+  } catch (err) {
+    res.status(500).json({ message: err });
+  }
+};
+exports.deleteConcert = async (req, res) => {
+  try {
+    const concert = await Concert.findByIdAndDelete(req.params.id);
+    if (!concert) res.status(404).json({ message: 'Not Found' });
+    else res.json(concert);
+  } catch (err) {
+    res.status(500).json({ message: err });
+  }
+};
