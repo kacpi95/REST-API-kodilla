@@ -33,10 +33,12 @@ exports.getSeatId = async (req, res) => {
 exports.postSeat = async (req, res) => {
   const { day, seat, client, email } = req.body;
   try {
-    const newSeat = new Seat(
-      { day: day, seat: seat, client: client, email: email },
-      { new: true }
-    );
+    const newSeat = new Seat({
+      day: day,
+      seat: seat,
+      client: client,
+      email: email,
+    });
     await newSeat.save();
     res.json({ message: 'OK' });
   } catch (err) {
@@ -44,24 +46,30 @@ exports.postSeat = async (req, res) => {
   }
 };
 
-router.put('/seats/:id', (req, res) => {
-  const id = Number(req.params.id);
+exports.putSeatId = async (req, res) => {
   const { author, text } = req.body;
-  const testimonialId = db.seats.findIndex((t) => t.id === id);
-  if (testimonialId !== -1) {
-    db.seats[testimonialId] = { id, author, text };
-    res.json({ message: 'OK' });
-  } else {
-    res.status(404).json({ message: 'Error' });
+  try {
+    const seat = await Seat.findByIdAndUpdate(
+      req.params.id,
+      {
+        author: author,
+        text: text,
+      },
+      { new: true }
+    );
+    if (!seat) res.status(404).json({ message: 'Not Found' });
+    else res.json({ seat });
+  } catch (err) {
+    res.status(500).json({ message: err });
   }
-});
-router.delete('/seats/:id', (req, res) => {
-  const id = Number(req.params.id);
-  const testimonialId = db.seats.findIndex((t) => t.id === id);
-  if (testimonialId !== -1) {
-    db.seats.splice(testimonialId, 1);
-    res.json({ message: 'OK' });
-  } else {
-    res.status(404).json({ message: 'Error' });
+};
+
+exports.deleteSeat = async (req, res) => {
+  try {
+    const seat = await Seat.findByIdAndDelete(req.params.id);
+    if (!seat) res.status(404).json({ message: 'Not Found' });
+    else res.json(seat);
+  } catch (err) {
+    res.status(500).json({ message: err });
   }
-});
+};
