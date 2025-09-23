@@ -1,4 +1,3 @@
-const express = require('express');
 const Concert = require('../models/concerts.model');
 
 exports.getAll = async (req, res) => {
@@ -32,9 +31,9 @@ exports.getConcertId = async (req, res) => {
 };
 
 exports.postConcert = async (req, res) => {
-  const { author, text } = req.body;
+  const { performer, genre, price, day, image } = req.body;
   try {
-    const newConcert = new Concert({ author: author, text: text });
+    const newConcert = new Concert({ performer, genre, price, day, image });
     await newConcert.save();
     res.json(newConcert);
   } catch (err) {
@@ -43,12 +42,12 @@ exports.postConcert = async (req, res) => {
 };
 
 exports.putConcertId = async (req, res) => {
-  const { author, text } = req.body;
+  const { performer, genre, price, day, image } = req.body;
 
   try {
     const concert = await Concert.findByIdAndUpdate(
       req.params.id,
-      { author: author, text: text },
+      { performer, genre, price, day, image },
       { new: true }
     );
     if (!concert) res.status(404).json({ message: 'Not Found' });
