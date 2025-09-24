@@ -27,10 +27,13 @@ app.use((req, res) => {
   res.status(404).json({ message: '404 not found...' });
 });
 
-mongoose.connect('mongodb://0.0.0.0:27017/NewWaveDB', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  'mongodb+srv://karfol5:Zaq12wsx@cluster0.bkimkkm.mongodb.net/NewWaveDB?retryWrites=true&w=majority&appName=Cluster0',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 const db = mongoose.connection;
 
 db.once('open', () => {
