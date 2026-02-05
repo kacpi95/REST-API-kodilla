@@ -1,5 +1,5 @@
 import { Container } from 'reactstrap';
-import OrderTicketForm from '../../features/OrderTicketForm/OrderTicketForm';
+import OrderTicketForm from '../../components/features/OrderTicketForm/OrderTicketForm';
 
 const Order = () => (
   <Container>
