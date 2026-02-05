@@ -1,0 +1,18 @@
+.alert {
+  padding: 12px 14px;
+  margin: 12px 0;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.35;
+  border: 1px solid transparent;
+}
+
+.info {
+  background: rgba(0, 0, 0);
+  border-color: rgba(0, 0, 0);
+}
+
+.warning {
+  background: rgba(255, 165, 0, 0.1);
+  border-color: rgba(255, 165, 0, 0.3);
+}
