@@ -2,7 +2,7 @@ const Testimonial = require('../models/testimonials.model');
 
 exports.getAll = async (req, res) => {
   try {
-    res.json(Testimonial.find());
+    res.json(await Testimonial.find());
   } catch (err) {
     res.status(500).json({ message: err });
   }
@@ -14,7 +14,7 @@ exports.getRandom = async (req, res) => {
     const random = Math.floor(Math.random() * count);
     const newTestimonial = await Testimonial.findOne().skip(random);
     if (!newTestimonial) res.status(404).json({ message: 'Not Found' });
-    else res.json({ message: 'OK' });
+    else res.json(newTestimonial);
   } catch (err) {
     res.status(500).json({ message: err });
   }
@@ -49,7 +49,7 @@ exports.putTestimonial = async (req, res) => {
     const testimonial = await Testimonial.findByIdAndUpdate(
       req.params.id,
       { author, text },
-      { new: true }
+      { new: true },
     );
     if (!testimonial) res.status(404).json({ message: 'Not Found' });
     else res.json(testimonial);

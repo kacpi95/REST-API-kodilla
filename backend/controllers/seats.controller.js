@@ -23,7 +23,7 @@ exports.getRandom = async (req, res) => {
 exports.getSeatId = async (req, res) => {
   try {
     const seat = await Seat.findById(req.params.id);
-    if (!seat) res.status(400).json({ message: 'Not Found' });
+    if (!seat) res.status(404).json({ message: 'Not Found' });
     else res.json(seat);
   } catch (err) {
     res.status(500).json({ message: err });
@@ -40,7 +40,7 @@ exports.postSeat = async (req, res) => {
       email,
     });
     await newSeat.save();
-    res.json({ message: 'OK' });
+    res.status(201).json(newSeat);
   } catch (err) {
     res.status(500).json({ message: err });
   }
@@ -57,10 +57,10 @@ exports.putSeatId = async (req, res) => {
         client,
         email,
       },
-      { new: true }
+      { new: true },
     );
     if (!seat) res.status(404).json({ message: 'Not Found' });
-    else res.json({ seat });
+    else res.json(seat);
   } catch (err) {
     res.status(500).json({ message: err });
   }
