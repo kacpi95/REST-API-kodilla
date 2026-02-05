@@ -15,13 +15,30 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+const PORT = process.env.PORT || 8000;
+const server = app.listen(`${PORT}`, () => {
+  console.log(`Server is running on port: ${PORT}`);
+});
+
+const io = socket(server);
+
+io.on('connection', (socket) => {
+  console.log('New socket!', socket.id);
+});
+
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
+
 app.use('/api', testimonialsRoutes);
 app.use('/api', concertsRoutes);
 app.use('/api', seatsRoutes);
 
-app.use(express.static(path.join(__dirname, '/client/build')));
+app.use(express.static(path.join(__dirname, '../client/build')));
+
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/client/build/index.html'));
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
 app.use((req, res) => {
@@ -38,18 +55,3 @@ db.once('open', () => {
   console.log('Connected to the database');
 });
 db.on('error', (err) => console.log('Error ' + err));
-
-const server = app.listen(process.env.PORT || 8000, () => {
-  console.log('Server is running on port: 8000');
-});
-
-const io = socket(server);
-
-app.use((req, res, next) => {
-  req.io = io;
-  next();
-});
-
-io.on('connection', (socket) => {
-  console.log('New socket!');
-});
