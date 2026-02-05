@@ -1,0 +1,76 @@
+.seats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  max-width: 30rem;
+  gap: 6px;
+}
+
+.seat {
+  margin: 0.2rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 10px;
+  border: 1px solid rgb(0, 0, 0);
+  cursor: pointer;
+  user-select: none;
+}
+
+.free {
+  background: transparent;
+}
+
+.taken {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.selected {
+  border-width: 2px;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 8px 0 16px;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgb(0, 0, 0);
+}
+
+.dotTaken {
+  background: rgb(0, 0, 0);
+}
+
+.dotFree {
+  background: transparent;
+}
+
+.dotSelected {
+  background: rgb(0, 0, 0);
+}
+
+.counter {
+  margin-top: 12px;
+}
+
+@media (max-width: 1200px) {
+  .seat {
+    width: 2.2rem;
+    height: 2.2rem;
+    padding: 0;
+  }
+}
