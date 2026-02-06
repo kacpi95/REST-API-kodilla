@@ -1,3 +1,5 @@
+@use '../../../styles/settings.scss' as *;
+
 .alert {
   padding: 12px 14px;
   margin: 12px 0;
@@ -8,11 +10,11 @@
 }
 
 .info {
-  background: rgba(0, 0, 0);
-  border-color: rgba(0, 0, 0);
+  background: $color-primary;
+  color: $color-text-bright;
 }
 
 .warning {
-  background: rgba(255, 165, 0, 0.1);
-  border-color: rgba(255, 165, 0, 0.3);
+  background: $color-error;
+  color: $color-text-bright;
 }

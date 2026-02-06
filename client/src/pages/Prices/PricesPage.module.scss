@@ -1,5 +1,182 @@
+@use '../../styles/settings.scss' as *;
+
 .container {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 30px 16px 30px;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr;
+  gap: 16px;
+  align-items: start;
+  margin: 10px 0 16px;
+}
+
+.title {
+  margin: 0 0 8px;
+  font-size: 2.2rem;
+  line-height: 1.1;
+}
+
+.lead {
+  max-width: 62ch;
+  margin: 0;
+  opacity: 0.8;
+}
+
+.summaryCard {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid $color-editor-border;
+  border-radius: 18px;
+  background: $color-gray-card;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.summaryLabel {
+  opacity: 0.7;
+}
+
+.summaryValue {
+  font-weight: 700;
+}
+
+.cta {
+  margin-top: 6px;
+  display: inline-flex;
+  justify-content: center;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid $color-editor-border;
+  background: $color-text-bright;
+  text-decoration: none;
+  transition:
+    transform 180ms ease,
+    background 1s ease;
+}
+.cta:hover {
+  background-color: $color-gray-card;
+  transform: translateY(-2px);
+}
+
+.grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  padding: 14px;
+  border: 1px solid $color-editor-border;
+  border-radius: 18px;
+  background: $color-text-bright;
+  overflow: hidden;
+  transition: transform 180ms ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 50px;
+  border: 1px solid $color-editor-border;
+  background: $color-gray-card;
+  font-size: 13px;
+}
+
+.price {
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.cardTitle {
+  margin: 0 0 10px;
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+.list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.listItem {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 8px;
+  align-items: start;
+  opacity: 0.9;
+}
+
+.check {
+  display: inline-grid;
+  width: 18px;
+  height: 18px;
+  place-items: center;
+  border-radius: 6px;
+  border: 1px solid $color-editor-border;
+  background: $color-gray-card;
+  font-size: 12px;
+}
+
+.faq {
+  margin-top: 22px;
+}
+
+.sectionTitle {
+  margin: 0 0 10px;
+  font-size: 1.4rem;
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.faqItem {
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid $color-editor-border;
+  background: $color-gray-card;
+}
+
+.faqTitle {
+  margin: 0 0 6px;
+  font-size: 1rem;
+}
+
+.faqText {
+  margin: 0;
+  opacity: 0.8;
+}
+
+@media (max-width: 900px) {
+  .header {
+    grid-template-columns: 1fr;
+  }
 }
