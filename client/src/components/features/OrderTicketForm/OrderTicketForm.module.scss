@@ -1,22 +1,44 @@
+@use '../../../styles/settings.scss' as *;
+
 .form {
   width: 100%;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 16px;
+  align-items: start;
 }
 
-@media (max-width: 768px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
+.card {
+  padding: 14px;
+  border: 1px solid $color-editor-border;
+  border-radius: 18px;
+  background: $color-background;
+}
+
+.cardHeader {
+  margin-bottom: 10px;
+}
+
+.cardTitle {
+  margin: 0 0 4px;
+  font-size: 1.2rem;
+}
+
+.cardSub {
+  margin: 0;
+  opacity: 0.8;
+}
+
+.muted {
+  opacity: 0.7;
 }
 
 .field {
-  margin-bottom: 16px;
-  max-width: 25rem;
+  margin: 12px 0;
+  max-width: 28rem;
 }
 
 .label {
@@ -29,9 +51,9 @@
 .select {
   width: 100%;
   padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid rgb(0, 0, 0);
-  outline: none;
+  border-radius: 12px;
+  border: 1px solid $color-editor-border;
+  background: $color-background;
 }
 
 .help {
@@ -43,9 +65,9 @@
 .checkboxRow {
   display: flex;
   gap: 10px;
-  max-width: 25rem;
   align-items: flex-start;
   margin-top: 12px;
+  max-width: 28rem;
 }
 
 .checkbox {
@@ -54,13 +76,56 @@
 
 .button {
   margin-top: 14px;
+  width: 100%;
+  max-width: 28rem;
   padding: 10px 14px;
-  border-radius: 12px;
-  border: none;
+  border-radius: 14px;
+  border: 1px solid $color-editor-border;
+  background: $color-background;
   cursor: pointer;
 }
 
 .button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.side {
+  position: sticky;
+  top: 14px;
+}
+
+.sideCard {
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid $color-editor-border;
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.sideHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+
+.sideTitle {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.sideSub {
+  margin: 0;
+  opacity: 0.8;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .side {
+    position: static;
+  }
 }

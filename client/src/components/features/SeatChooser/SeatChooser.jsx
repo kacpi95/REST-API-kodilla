@@ -66,7 +66,7 @@ export default function SeatChooser({ chosenDay, chosenSeat, updateSeat }) {
           <span className={`${styles.legendDot} ${styles.dotFree}`} /> free
         </span>
         <span className={styles.legendItem}>
-          <span className={`${styles.legendDot} ${styles.dotSelected}`} />{' '}
+          <span className={`${styles.legendDot} ${styles.dotSelected}`} />
           selected
         </span>
       </div>

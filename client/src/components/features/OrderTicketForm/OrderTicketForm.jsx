@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SeatChooser from '../SeatChooser/SeatChooser';
 import { addSeatRequest, getRequests } from '../../../redux/seatsRedux';
@@ -18,6 +18,7 @@ export default function OrderTicketForm() {
   });
 
   const [isError, setIsError] = useState(false);
+  const [accepted, setAccepted] = useState(false);
 
   const updateSeat = (e, seatId) => {
     e.preventDefault();
@@ -31,37 +32,59 @@ export default function OrderTicketForm() {
 
   const updateNumberField = ({ target }) => {
     const { value, name } = target;
-    setOrder((prev) => ({ ...prev, [name]: parseInt(value, 10) }));
+    setOrder((prev) => ({ ...prev, [name]: parseInt(value, 10), seat: '' }));
   };
+
+  const addSeat = requests?.ADD_SEAT;
+
+  const canSubmit = useMemo(() => {
+    return Boolean(
+      order.client &&
+      order.email &&
+      order.day &&
+      order.seat &&
+      accepted &&
+      !addSeat?.pending,
+    );
+  }, [order, accepted, addSeat?.pending]);
 
   const submitForm = async (e) => {
     e.preventDefault();
 
-    if (order.client && order.email && order.day && order.seat) {
+    if (canSubmit) {
       await dispatch(addSeatRequest(order));
 
-      setOrder({
-        client: '',
-        email: '',
-        day: 1,
-        seat: '',
-      });
+      setOrder({ client: '', email: '', day: 1, seat: '' });
+      setAccepted(false);
       setIsError(false);
     } else {
       setIsError(true);
     }
   };
 
-  const addSeat = requests?.ADD_SEAT;
-
   return (
     <form className={styles.form} onSubmit={submitForm}>
       <div className={styles.grid}>
-        <div>
+        <section className={styles.card}>
+          <div className={styles.cardHeader}>
+            <h2 className={styles.cardTitle}>Your details</h2>
+            <p className={styles.cardSub}>
+              Day <strong>{order.day}</strong>
+              {order.seat ? (
+                <>
+                  · Seat <strong>{order.seat}</strong>
+                </>
+              ) : (
+                <span className={styles.muted}>
+                  · Choose a seat on the right
+                </span>
+              )}
+            </p>
+          </div>
+
           {isError && (
             <AlertBox variant='warning'>
-              There are some errors in your form. Did you fill all fields and
-              choose a seat?
+              Please fill in name & email, choose a seat, and accept terms.
             </AlertBox>
           )}
 
@@ -110,9 +133,8 @@ export default function OrderTicketForm() {
 
           <div className={styles.field}>
             <label className={styles.label} htmlFor='clientDay'>
-              Select which day of festivals are you interested in:
+              Festival day
             </label>
-
             <select
               id='clientDay'
               className={styles.select}
@@ -120,42 +142,54 @@ export default function OrderTicketForm() {
               name='day'
               onChange={updateNumberField}
             >
-              <option value={1}>1</option>
-              <option value={2}>2</option>
-              <option value={3}>3</option>
+              <option value={1}>Day 1</option>
+              <option value={2}>Day 2</option>
+              <option value={3}>Day 3</option>
             </select>
 
             <small className={styles.help}>
-              Every day of the festival uses an individual ticket. You can book
-              only one ticket at a time.
+              One ticket is valid for one day. Changing the day clears the
+              selected seat.
             </small>
           </div>
 
           <label className={styles.checkboxRow}>
-            <input className={styles.checkbox} required type='checkbox' />
+            <input
+              className={styles.checkbox}
+              type='checkbox'
+              checked={accepted}
+              onChange={(e) => setAccepted(e.target.checked)}
+            />
             <span>
-              I agree with{' '}
-              <a href='/terms-and-conditions'>Terms and conditions</a> and{' '}
+              I agree with
+              <a href='/terms-and-conditions'>Terms and conditions</a> and
               <a href='/privacy-policy'>Privacy Policy</a>.
             </span>
           </label>
 
-          <button
-            className={styles.button}
-            type='submit'
-            disabled={addSeat?.pending}
-          >
-            Submit
+          <button className={styles.button} type='submit' disabled={!canSubmit}>
+            {order.seat
+              ? `Book seat ${order.seat}`
+              : 'Choose a seat to continue'}
           </button>
-        </div>
+        </section>
 
-        <div>
-          <SeatChooser
-            chosenDay={order.day}
-            chosenSeat={order.seat}
-            updateSeat={updateSeat}
-          />
-        </div>
+        <aside className={styles.side}>
+          <div className={styles.sideCard}>
+            <div className={styles.sideHeader}>
+              <h2 className={styles.sideTitle}>Choose your seat</h2>
+              <p className={styles.sideSub}>
+                Selected: <strong>{order.seat || '—'}</strong>
+              </p>
+            </div>
+
+            <SeatChooser
+              chosenDay={order.day}
+              chosenSeat={order.seat}
+              updateSeat={updateSeat}
+            />
+          </div>
+        </aside>
       </div>
     </form>
   );
