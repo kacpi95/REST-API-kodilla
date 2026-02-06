@@ -31,22 +31,9 @@ export default function Lineup() {
     });
   }, [concerts, q, day]);
 
-  if (request.pending) return <SkeletonGrid count={6} />;
-  if (request.error)
-    return <AlertBox variant='warning'>{request.error}</AlertBox>;
-
-  if (!request.success || concerts.length === 0) {
-    return <EmptyState title='No concerts' description='Try again later.' />;
-  }
-
-  if (filtered.length === 0) {
-    return (
-      <EmptyState
-        title='No matches'
-        description='Try changing search or day.'
-      />
-    );
-  }
+  const showNoData = request.success && concerts.length === 0;
+  const showNoMatches =
+    request.success && concerts.length > 0 && filtered.length === 0;
 
   return (
     <div>
@@ -72,7 +59,32 @@ export default function Lineup() {
         </select>
       </div>
 
-      <Concerts concerts={filtered} />
+      {request.pending && <SkeletonGrid count={6} />}
+      {request.error && <AlertBox variant='warning'>{request.error}</AlertBox>}
+
+      {showNoData && (
+        <EmptyState title='No concerts' description='Try again later.' />
+      )}
+
+      {showNoMatches && (
+        <div className={styles.noMatches}>
+          <EmptyState
+            title='No matches'
+            description='Try changing search or day.'
+          />
+          <button
+            type='button'
+            className={styles.clearButton}
+            onClick={() => setQ('')}
+          >
+            Clear search
+          </button>
+        </div>
+      )}
+
+      {request.success && filtered.length > 0 && (
+        <Concerts concerts={filtered} />
+      )}
     </div>
   );
 }
