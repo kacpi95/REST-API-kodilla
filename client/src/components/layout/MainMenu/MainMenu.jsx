@@ -4,11 +4,15 @@ import styles from './MainMenu.module.scss';
 
 export default function MainMenu() {
   const [open, setOpen] = useState(false);
+  const close = () => setOpen(false);
+
+  const linkClass = ({ isActive }) =>
+    `${styles.link} ${isActive ? styles.active : ''}`;
 
   return (
     <header className={styles.navbar}>
       <div className={styles.inner}>
-        <Link className={styles.brand} to='/'>
+        <Link className={styles.brand} to='/' onClick={close}>
           New Wave Festival
         </Link>
 
@@ -17,20 +21,24 @@ export default function MainMenu() {
           type='button'
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
+          aria-controls='main-nav'
           aria-label='Toggle navigation'
         >
-          ☰
+          <span className={styles.burger} />
         </button>
 
-        <nav className={`${styles.nav} ${open ? styles.open : ''}`}>
-          <NavLink className={styles.link} to='/' end>
+        <nav
+          id='main-nav'
+          className={`${styles.nav} ${open ? styles.open : ''}`}
+        >
+          <NavLink className={linkClass} to='/' end onClick={close}>
             Home
           </NavLink>
-          <NavLink className={styles.link} to='/prices'>
+          <NavLink className={linkClass} to='/prices' onClick={close}>
             Prices
           </NavLink>
-          <NavLink className={styles.cta} to='/order-a-ticket'>
-            Order a ticket!
+          <NavLink className={styles.cta} to='/order-a-ticket' onClick={close}>
+            Order a ticket
           </NavLink>
         </nav>
       </div>
