@@ -2,23 +2,18 @@ import styles from './Concert.module.scss';
 
 export default function Concert({ performer, price, genre, day, image }) {
   return (
-    <article className={styles.concert}>
-      <div className={styles.row}>
-        <div className={styles.col}>
-          <div className={styles.imageContainer}>
-            <img className={styles.image} src={image} alt={performer} />
-          </div>
-        </div>
+    <article className={styles.card}>
+      <div className={styles.imageWrap}>
+        <img className={styles.image} src={image} alt={performer} />
+      </div>
 
-        <div className={styles.col}>
-          <div className={styles.info}>
-            <img className={styles.back} src={image} alt={performer} />
-            <h2 className={styles.performer}>{performer}</h2>
-            <h3 className={styles.genre}>{genre}</h3>
-            <p className={styles.dayPrice}>
-              Day: {day}, Price: {price}$
-            </p>
-          </div>
+      <div className={styles.body}>
+        <h3 className={styles.title}>{performer}</h3>
+        <p className={styles.subtitle}>{genre}</p>
+
+        <div className={styles.meta}>
+          <span className={styles.badge}>Day {day}</span>
+          <span className={styles.badge}>${price}</span>
         </div>
       </div>
     </article>
