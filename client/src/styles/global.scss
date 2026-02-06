@@ -1,7 +1,17 @@
-@import './settings.scss';
+@use './settings.scss' as *;
+@use './normalize.scss';
+@use './typography.scss';
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
 }
 
 body {
@@ -10,20 +20,17 @@ body {
   color: $color-text-light;
   background: $color-background;
   font-family: $font-text;
-  font-size: ($base-size * 1.3);
+  font-size: calc(#{$base-size} * 1.3);
   line-height: 1.7;
   letter-spacing: 0.5px;
   overflow-y: scroll;
-  min-height: 100vh;
 }
 
-a, a:hover, a:visited {
+a {
+  text-decoration: none;
+  color: inherit;
+}
+a:hover,
+a:visited {
   text-decoration: none;
 }
-
-.container {
-  margin: 1rem auto;
-  min-height: calc(100vh - 14rem);
-}
-
-@import './typography.scss';
