@@ -4,6 +4,7 @@ $color-text-bright: #fff;
 $color-primary: #3498db;
 $color-secondary: #218c74;
 $color-background: #fff;
+$color-skeleton: rgba(0, 0, 0, 0.08);
 
 $color-success: #01916d;
 $color-success-back: #00bc8c;
@@ -13,7 +14,7 @@ $color-warning: #f0932b;
 $color-warning-back: #d68529;
 $color-danger: #f0932b;
 $color-danger-back: #d68529;
-$color-error: #EA2027;
+$color-error: #ea2027;
 $color-error-back: #ff5d6c;
 
 $color-textfield-border: #ddd;
@@ -28,7 +29,8 @@ $base-size: 14px;
 $transition: all 0.5s;
 
 @mixin p-el($element) {
-  &:#{$element}, &::#{$element} {
+  &:#{$element},
+  &::#{$element} {
     position: absolute;
     @content;
   }
