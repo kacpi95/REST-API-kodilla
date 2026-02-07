@@ -3,7 +3,7 @@ import styles from './OrderPage.module.scss';
 
 export default function OrderPage() {
   return (
-    <div className={styles.container}>
+    <div className={`container ${styles.page}`}>
       <header className={styles.header}>
         <div>
           <h1 className={styles.title}>Order a ticket</h1>

@@ -1,11 +1,12 @@
 import MainMenu from '../MainMenu/MainMenu';
 import Footer from '../Footer/Footer';
+import styles from './MainLayout.module.scss';
 
 export default function MainLayout({ children }) {
   return (
-    <div className='layout'>
+    <div className={styles.layout}>
       <MainMenu />
-      <main className='content'>{children}</main>
+      <main className={styles.content}>{children}</main>
       <Footer />
     </div>
   );

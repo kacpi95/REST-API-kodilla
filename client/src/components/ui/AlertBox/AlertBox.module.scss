@@ -3,18 +3,25 @@
 .alert {
   padding: 12px 14px;
   margin: 12px 0;
-  border-radius: 12px;
+  border-radius: $radius-md;
   font-size: 14px;
   line-height: 1.35;
-  border: 1px solid transparent;
+  border: 1px solid $color-border;
+  background: $color-surface;
 }
 
 .info {
-  background: $color-primary;
-  color: $color-text-bright;
+  border-color: rgba($color-info, 0.35);
 }
 
 .warning {
-  background: $color-error;
-  color: $color-text-bright;
+  border-color: rgba($color-warning, 0.35);
+}
+
+.success {
+  border-color: rgba($color-success, 0.35);
+}
+
+.danger {
+  border-color: rgba($color-error, 0.35);
 }

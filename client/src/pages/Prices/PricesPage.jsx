@@ -35,7 +35,7 @@ const PRICES = [
 
 export default function PricesPage() {
   return (
-    <div className={styles.container}>
+    <div className={`container ${styles.container}`}>
       <header className={styles.header}>
         <div>
           <h1 className={styles.title}>Tickets & Pricing</h1>

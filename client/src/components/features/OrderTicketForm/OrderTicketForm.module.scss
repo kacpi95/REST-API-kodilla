@@ -12,119 +12,34 @@
 }
 
 .card {
-  padding: 14px;
-  border: 1px solid $color-editor-border;
-  border-radius: 18px;
-  background: $color-background;
-}
-
-.cardHeader {
-  margin-bottom: 10px;
-}
-
-.cardTitle {
-  margin: 0 0 4px;
-  font-size: 1.2rem;
-}
-
-.cardSub {
-  margin: 0;
-  opacity: 0.8;
-}
-
-.muted {
-  opacity: 0.7;
-}
-
-.field {
-  margin: 12px 0;
-  max-width: 28rem;
-}
-
-.label {
-  display: block;
-  margin-bottom: 6px;
-  font-weight: 600;
+  @include card($color-background);
 }
 
 .input,
 .select {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 1px solid $color-editor-border;
-  background: $color-background;
-}
-
-.help {
-  display: block;
-  margin-top: 6px;
-  opacity: 0.75;
-}
-
-.checkboxRow {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  margin-top: 12px;
-  max-width: 28rem;
-}
-
-.checkbox {
-  margin-top: 3px;
+  @include inputBase;
 }
 
 .button {
+  @include buttonBase;
   margin-top: 14px;
   width: 100%;
   max-width: 28rem;
-  padding: 10px 14px;
-  border-radius: 14px;
-  border: 1px solid $color-editor-border;
-  background: $color-background;
-  cursor: pointer;
-}
 
-.button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.side {
-  position: sticky;
-  top: 14px;
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 }
 
 .sideCard {
-  padding: 14px;
-  border-radius: 18px;
-  border: 1px solid $color-editor-border;
-  background: rgba(0, 0, 0, 0.02);
-}
-
-.sideHeader {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  align-items: baseline;
-  margin-bottom: 10px;
-}
-
-.sideTitle {
-  margin: 0;
-  font-size: 1.2rem;
-}
-
-.sideSub {
-  margin: 0;
-  opacity: 0.8;
+  @include card($color-surface);
 }
 
 @media (max-width: 900px) {
   .grid {
     grid-template-columns: 1fr;
   }
-
   .side {
     position: static;
   }

@@ -1,10 +1,15 @@
+@use '../../../styles/settings.scss' as *;
+
 .footer {
   margin-top: 3rem;
-  padding: 1rem 0;
-  background: #212529;
-  color: rgba(255, 255, 255, 0.7);
+  padding: 14px 0;
+  background: $color-text;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
   text-align: center;
 }

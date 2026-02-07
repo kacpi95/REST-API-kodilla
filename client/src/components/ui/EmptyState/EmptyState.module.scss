@@ -1,9 +1,11 @@
+@use '../../../styles/settings.scss' as *;
+
 .empty {
   padding: 22px;
-  border: 1px dashed rgba(0, 0, 0, 0.02);
-  border-radius: 18px;
+  border: 1px dashed $color-border;
+  border-radius: $radius-lg;
   text-align: center;
-  opacity: 0.9;
+  background: $color-surface;
 }
 
 .icon {

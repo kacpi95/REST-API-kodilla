@@ -9,11 +9,7 @@
 
 .input,
 .select {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 1px solid $color-editor-border;
-  background: $color-background;
+  @include inputBase;
 }
 
 .noMatches {
@@ -23,27 +19,21 @@
   margin-top: 20px;
   padding: 24px;
   gap: 12px;
-  border: 1px dashed $color-editor-border;
-  border-radius: 16px;
-  background: $color-gray-card;
+  border: 1px dashed $color-border;
+  border-radius: $radius-lg;
+  background: $color-surface-2;
 }
 
 .clearButton {
+  @include buttonBase;
   margin-top: 4px;
   padding: 8px 14px;
-  border-radius: 14px;
-  border: 1px solid $color-editor-border;
-  background: $color-background;
-  cursor: pointer;
   font-size: 14px;
-  transition:
-    background 160ms ease,
-    transform 160ms ease;
-}
 
-.clearButton:hover {
-  background: $color-skeleton;
-  transform: translateY(-1px);
+  &:hover {
+    background: $color-skeleton;
+    transform: translateY(-1px);
+  }
 }
 
 @media (max-width: 900px) {

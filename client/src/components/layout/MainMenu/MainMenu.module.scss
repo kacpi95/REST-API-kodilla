@@ -1,4 +1,4 @@
-@use '../../../styles//settings.scss' as *;
+@use '../../../styles/settings.scss' as *;
 
 .navbar {
   position: sticky;
@@ -6,7 +6,7 @@
   z-index: 50;
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid $color-editor-border;
+  border-bottom: 1px solid $color-border;
 }
 
 .inner {
@@ -22,6 +22,7 @@
   font-weight: 800;
   letter-spacing: 0.2px;
   text-decoration: none;
+  color: $color-text;
 }
 
 .nav {
@@ -34,15 +35,16 @@
 .link {
   text-decoration: none;
   padding: 8px 10px;
-  border-radius: 12px;
+  border-radius: $radius-md;
   opacity: 0.85;
   transition:
-    background 160ms ease,
-    opacity 160ms ease;
+    background $transition-fast,
+    opacity $transition-fast;
+  color: $color-text;
 }
 
 .link:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: $color-surface-2;
   opacity: 1;
 }
 
@@ -55,10 +57,11 @@
 .cta {
   text-decoration: none;
   padding: 9px 12px;
-  border-radius: 14px;
-  border: 1px solid $color-editor-border;
+  border-radius: $radius-md;
+  border: 1px solid $color-border;
   background: $color-background;
-  transition: transform 160ms ease;
+  transition: transform $transition-fast;
+  color: $color-text;
 }
 
 .cta:hover {
@@ -72,10 +75,16 @@
   margin-left: auto;
   width: 42px;
   height: 38px;
-  border-radius: 12px;
-  border: 1px solid $color-editor-border;
+  border-radius: $radius-md;
+  border: 1px solid $color-border;
   background: $color-background;
   cursor: pointer;
+}
+
+.burger,
+.burger::before,
+.burger::after {
+  background: $color-text;
 }
 
 .burger {
@@ -83,7 +92,6 @@
   position: relative;
   width: 18px;
   height: 2px;
-  background: $color-skeleton;
 }
 
 .burger::before,
@@ -93,13 +101,11 @@
   left: 0;
   width: 18px;
   height: 2px;
-  background: $color-skeleton;
 }
 
 .burger::before {
   top: -6px;
 }
-
 .burger::after {
   top: 6px;
 }

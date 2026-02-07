@@ -1,0 +1,47 @@
+@use './tokens' as *;
+
+@mixin p-el($element) {
+  &:#{$element},
+  &::#{$element} {
+    position: absolute;
+    @content;
+  }
+}
+
+@mixin card($bg: $color-background) {
+  padding: 14px;
+  border-radius: $radius-lg;
+  border: 1px solid $color-border;
+  background: $bg;
+}
+
+@mixin inputBase {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: $radius-md;
+  border: 1px solid $color-border;
+  background: $color-background;
+}
+
+@mixin buttonBase {
+  padding: 10px 14px;
+  border-radius: $radius-md;
+  border: 1px solid $color-border;
+  background: $color-background;
+  cursor: pointer;
+  transition:
+    background $transition-fast,
+    transform $transition-fast;
+}
+
+@mixin hoverLift {
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+@mixin gridAuto($min: 240px, $gap: 16px) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min, 1fr));
+  gap: $gap;
+}

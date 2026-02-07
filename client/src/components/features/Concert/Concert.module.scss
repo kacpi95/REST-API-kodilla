@@ -1,21 +1,20 @@
 @use '../../../styles/settings.scss' as *;
 
 .card {
-  border-radius: 18px;
+  @include card($color-background);
+  padding: 0;
   overflow: hidden;
-  border: 1px solid $color-editor-border;
-  background: $color-background;
-  transition: transform 180ms ease;
-}
+  transition: transform $transition-fast;
 
-.card:hover {
-  transform: translateY(-2px);
+  &:hover {
+    transform: translateY(-2px);
+  }
 }
 
 .imageWrap {
   height: 160px;
   overflow: hidden;
-  background: rgba(0, 0, 0, 0.04);
+  background: $color-surface-2;
 }
 
 .image {
@@ -23,7 +22,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 1s ease;
+  transition: transform 600ms ease;
 }
 
 .card:hover .image {
@@ -59,8 +58,8 @@
   align-items: center;
   height: 26px;
   padding: 0 10px;
-  border-radius: 50px;
-  border: 1px solid $color-editor-border;
-  background: rgba(0, 0, 0, 0.03);
+  border-radius: 100px;
+  border: 1px solid $color-border;
+  background: $color-surface-2;
   font-size: 13px;
 }
