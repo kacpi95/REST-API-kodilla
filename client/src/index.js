@@ -9,16 +9,12 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/global.scss';
 
-const root = ReactDOM.createRoot(
-  document.querySelector('#root')
-);
+const root = ReactDOM.createRoot(document.querySelector('#root'));
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>,
 );
